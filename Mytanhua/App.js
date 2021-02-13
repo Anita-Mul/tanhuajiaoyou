@@ -5,7 +5,8 @@ class App extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Nav />
+        {/* <Nav /> */}
+        <Text>111</Text>
       </View>
     );
   }

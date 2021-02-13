@@ -255,10 +255,11 @@
 
    1. 编辑 `android/app/build.gradle` 
 
-   2. 添加以下配置
+   2. 添加以下配置（如果想要使用字体图标得使用以下的配置）
 
       ```jsx
       project.ext.vectoricons = [
+          //如果想添加自定义字体的话添加下面的代码
           iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
       ]
       
@@ -274,6 +275,15 @@
       
       const icon = <FontAwesome5 name={'comments'} />;
       ```
+   5. 如果想要输入框左边加图标
+      ```jsx
+      import { Input } from 'react-native-elements';
+      <Input
+        placeholder='请输入手机号码'
+        leftIcon={{ type: 'font-awesome', name: 'phone'}}
+       />
+      ```
+
 
 
 
@@ -565,7 +575,7 @@
       }
       ```
    
-   3. 编辑 `MainApplication.java`：
+   3. 编辑 strl + e `MainApplication.java`：
    
       ```diff
       + import cn.qiuxiang.react.geolocation.AMapGeolocationPackage;

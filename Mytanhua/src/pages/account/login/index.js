@@ -54,10 +54,12 @@ class Index extends Component {
   };
 
   render() {
-    const {number, phoneValid} = this.state;
+    const {number, phoneValid, showLogin} = this.state;
     return (
       <View>
+        {/* 登陆开始 */}
         <View>
+          <View>
           <Input
             placeholder="INPUT WITH ICON"
             //可以输入的最大长度
@@ -77,8 +79,8 @@ class Index extends Component {
             leftIcon={{type: 'font-awesome', name: 'phone'}}
           />
         </View>
-        {/* 渐变按钮 */}
-        <View>
+          {/* 渐变按钮 */}
+          <View>
           <View
             style={{
               width: '85%',
@@ -97,6 +99,8 @@ class Index extends Component {
             </THButton>
           </View>
         </View>
+        </View>
+        {/* 登录结束 */}
       </View>
     );
   }

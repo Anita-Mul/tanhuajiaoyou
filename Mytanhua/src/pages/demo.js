@@ -1,64 +1,45 @@
-import React, {useState} from 'react';
-import {SafeAreaView, Text, StyleSheet} from 'react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
+import {init, Geolocation} from 'react-native-amap-geolocation';
+import axios from 'axios';
+class Geo {
+  async initGeo() {
+    if (Platform.OS === 'android') {
+      await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      );
+    }
+    await init({
+      // 那个网站android里面的key
+      ios: 'eae895e0d2d13b8b1389d8c78d30095c',
+      android: 'eae895e0d2d13b8b1389d8c78d30095c',
+    });
+    return Promise.resolve();
+  }
+  async getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+      console.log('开始定位');
+      Geolocation.getCurrentPosition(({coords}) => {
+        resolve(coords);
+      }, reject);
+    });
+  }
+  async getCityByLocation() {
+    await init({
+      // 那个网站android里面的key
+      ios: 'eae895e0d2d13b8b1389d8c78d30095c',
+      android: 'eae895e0d2d13b8b1389d8c78d30095c',
+    });
 
-import {
-  CodeField,
-  Cursor,
-  useBlurOnFulfill,
-  useClearByFocusCell,
-} from 'react-native-confirmation-code-field';
+    const {longitude, latitude} = await this.getCurrentPosition();
+    const res = await axios.get('https://restapi.amap.com/v3/geocode/regeo', {
+      params: {
+        location: `${longitude},${latitude}`,
+        // Anita_Map里面的key
+        key: 'c998d78ec88d171b87d43c8aac735de0',
+      },
+    });
+    return Promise.resolve(res.data);
+  }
+}
 
-const styles = StyleSheet.create({
-  root: {flex: 1, padding: 20},
-  title: {textAlign: 'center', fontSize: 30},
-  codeFieldRoot: {marginTop: 20},
-  cell: {
-    width: 40,
-    height: 40,
-    lineHeight: 38,
-    fontSize: 24,
-    borderWidth: 2,
-    borderColor: '#00000030',
-    textAlign: 'center',
-  },
-  focusCell: {
-    borderColor: '#000',
-  },
-});
-
-const CELL_COUNT = 6;
-
-const App = () => {
-  const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
-  });
-
-  return (
-    <SafeAreaView style={styles.root}>
-      <Text style={styles.title}>Verification</Text>
-      <CodeField
-        ref={ref}
-        {...props}
-        value={value}
-        onChangeText={setValue}
-        cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        renderCell={({index, symbol, isFocused}) => (
-          <Text
-            key={index}
-            style={[styles.cell, isFocused && styles.focusCell]}
-            onLayout={getCellOnLayoutHandler(index)}>
-            {symbol || (isFocused ? <Cursor /> : null)}
-          </Text>
-        )}
-      />
-    </SafeAreaView>
-  );
-};
-
-export default App;
+export default new Geo();
