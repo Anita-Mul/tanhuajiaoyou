@@ -1,0 +1,142 @@
+{
+  "code": "10000",
+  "msg": "请求成功",
+  "data": {
+    "id": 7,
+    "guid": "186657119781591501526289",
+    "mobile": "18665711978",
+    "header": "/upload/18665711978.png",
+    "nick_name": "一叶知秋",
+    "gender": "男",
+    "age": 23,
+    "marry": "单身",
+    "xueli": "本科",
+    "dist": 0,
+    "agediff": 0,
+    "fateValue": 50,
+    "trends": [
+      {
+        "tid": 3,
+        "uid": 7,
+        "content": "老婆给当程序员的老公打电话： “下班顺路买一斤包子带回来，如果看到卖西瓜的，买一个。”当晚，程序员老公手捧一个包子进了家门。老婆怒道：“你怎么就买了一个包子？！”老公答曰：“因为看到了卖西瓜的。”",
+        "star_count": 1,
+        "comment_count": 0,
+        "like_count": 1,
+        "status": 0,
+        "create_time": "2019-11-11T07:19:12.000Z",
+        "lng": null,
+        "lat": null,
+        "address": null,
+        "album": [
+          {
+            "aid": 6,
+            "tid": 3,
+            "thum_img_path": "/upload/album/1_7_1.jpg",
+            "org_img_path": "/upload/album/1_7_1.jpg"
+          }
+        ]
+      },
+      {
+        "tid": 2,
+        "uid": 7,
+        "content": "人生本来就是一件不容易的事情，不付 出不努力什么都得不到。我们现在还年轻，有大把的机会和时间，好好奋斗吧，让未来的自己变得更好。",
+        "star_count": 1,
+        "comment_count": 0,
+        "like_count": 1,
+        "status": 0,
+        "create_time": "2019-11-11T07:09:53.000Z",
+        "lng": null,
+        "lat": null,
+        "address": null,
+        "album": [
+          {
+            "aid": 3,
+            "tid": 2,
+            "thum_img_path": "/upload/album/2_7_1.jpg",
+            "org_img_path": "/upload/album/2_7_1.jpg"
+          },
+          {
+            "aid": 4,
+            "tid": 2,
+            "thum_img_path": "/upload/album/2_7_2.jpg",
+            "org_img_path": "/upload/album/2_7_2.jpg"
+          },
+          {
+            "aid": 5,
+            "tid": 2,
+            "thum_img_path": "/upload/album/2_7_3.jpg",
+            "org_img_path": "/upload/album/2_7_3.jpg"
+          }
+        ]
+      },
+      {
+        "tid": 1,
+        "uid": 7,
+        "content": "其实有时候想想，一辈子要追 求的东西太多了，而什么对我们最重要呢？我认为是健康。只有身体健健康了，我们才能全身心的去追求自己梦想的一切。",
+        "star_count": 12,
+        "comment_count": 4,
+        "like_count": 2,
+        "status": 0,
+        "create_time": "2019-11-11T07:07:49.000Z",
+        "lng": null,
+        "lat": null,
+        "address": null,
+        "album": [
+          {
+            "aid": 1,
+            "tid": 1,
+            "thum_img_path": "/upload/album/1_7_1.jpg",
+            "org_img_path": "/upload/album/1_7_1.jpg"
+          },
+          {
+            "aid": 2,
+            "tid": 1,
+            "thum_img_path": "/upload/album/1_7_2.jpg",
+            "org_img_path": "/upload/album/1_7_2.jpg"
+          }
+        ]
+      }
+    ],
+    "silder": [
+      {
+        "aid": 1,
+        "tid": 1,
+        "uid": 7,
+        "thum_img_path": "/upload/album/1_7_1.jpg",
+        "org_img_path": "/upload/album/1_7_1.jpg"
+      },
+      {
+        "aid": 2,
+        "tid": 1,
+        "uid": 7,
+        "thum_img_path": "/upload/album/1_7_2.jpg",
+        "org_img_path": "/upload/album/1_7_2.jpg"
+      },
+      {
+        "aid": 3,
+        "tid": 2,
+        "uid": 7,
+        "thum_img_path": "/upload/album/2_7_1.jpg",
+        "org_img_path": "/upload/album/2_7_1.jpg"
+      },
+      {
+        "aid": 4,
+        "tid": 2,
+        "uid": 7,
+        "thum_img_path": "/upload/album/2_7_2.jpg",
+        "org_img_path": "/upload/album/2_7_2.jpg"
+      },
+      {
+        "aid": 5,
+        "tid": 2,
+        "uid": 7,
+        "thum_img_path": "/upload/album/2_7_3.jpg",
+        "org_img_path": "/upload/album/2_7_3.jpg"
+      }
+    ]
+  },
+  "counts": 3,
+  "pagesize": "5",
+  "pages": 1,
+  "page": "1"
+}
