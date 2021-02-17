@@ -4,15 +4,25 @@ import request from "../../../utils/request";
 import { FRIENDS_PERSONALINFO, BASE_URI } from "../../../utils/pathMap";
 import HeaderImageScrollView from 'react-native-image-header-scroll-view';
 // teaset 
+// 这个是轮播图
 import { Carousel } from "teaset";
 import { pxToDp } from "../../../utils/stylesKits";
 import IconFont from "../../../components/IconFont";
 import LinearGradient from "react-native-linear-gradient";
+//点击图片放大的那个
 import ImageViewer from 'react-native-image-zoom-viewer';
 import JMessage from '../../../utils/JMessage';
 import { inject, observer } from 'mobx-react';
 import Toast from '../../../utils/Toast';
 
+/**
+ * 跳转页面之前：
+ *      onPress = {() => this.context.navigate("Detail", {id: v.id})}
+ * 在这个页面使用
+ *      this.props.route.params 就是 {id: v.id}
+ * 从数据库中接收到的数据如果不清楚，就可以这样打印，console.log(JSON.stringify(res));
+ * 之后把接收到的数据粘贴到一个JSON的文件中，格式化一下就可以了，就是放到了下面那个Untitled-1.json中啦
+ */
 @inject("UserStore")
 @observer
 class Index extends Component {
@@ -43,9 +53,12 @@ class Index extends Component {
   // 获取朋友详情
   getDetail = async () => {
     const url = FRIENDS_PERSONALINFO.replace(":id", this.props.route.params.id);
+    // 接口中说发送get请求的时候，还得发送page和pageSize，所以得把它都写到一个params中，并传过去
     const res = await request.privateGet(url, this.params);
     this.totalPages=res.pages;
     this.isLoading=false;
+    // 因为分页的原因，所以userDetail是这一页的数据，而trends是总数据
+    // 哦，我悟了，userDetail中有这个用户的各种信息，这个用户中有这一页的数据，包括下面的相关用户
     this.setState({ userDetail: res.data,trends:[...this.state.trends,...res.data.trends] });
   }
 
@@ -59,7 +72,7 @@ class Index extends Component {
     
   }
 
-
+  
   // 列表滚动事件
   onScroll = ({nativeEvent}) => {
     // 1. `nativeEvent.contentSize.height`  列表内容的高度
@@ -71,11 +84,12 @@ class Index extends Component {
     // console.log("滚动条距离顶部的高度",nativeEvent.contentOffset.y);
 
     // console.log(nativeEvent.contentSize.height-nativeEvent.layoutMeasurement.height-nativeEvent.contentOffset.y);
-    // 滚动条触底
+    // 滚动条触底，其实就是下面这个值等于0，其实小于10，都可以认为滚动条触底了
     const isReachBottom=nativeEvent.contentSize.height-nativeEvent.layoutMeasurement.height-nativeEvent.contentOffset.y<10;
     // 还有没有下一页数据
     const hasMore=this.params.page<this.totalPages;
     if(isReachBottom&&hasMore&&! this.isLoading){
+      // 这个isLoading表示是否有人在发请求
       this.isLoading=true;
       this.params.page++;
       this.getDetail();
@@ -83,7 +97,7 @@ class Index extends Component {
 
   }
 
-  // 点击了喜欢按钮
+  // 点击了喜欢按钮，跟极光有关
   sendLike=async ()=>{
     // 收件人 => 正在被浏览的用户 this.state.userDetail
     const guid=this.state.userDetail.guid;
@@ -102,16 +116,24 @@ class Index extends Component {
     this.props.navigation.navigate("Chat",userDetail);
   }
 
+  /**
+   * 
+   * @param {滚动条触底，图片放大插件，轮播图插件的使用} param0 
+   */
   render() {
     // console.log(this.props.route.params);
     const { userDetail, imgUrls, currentIndex, showAlbum,trends } = this.state;
+    // 从数据库拿东西需要时间
     if (!userDetail.silder) return <></>
     return (
       <HeaderImageScrollView
+        // 滚动条触底得先加上一个onScroll事件
         onScroll={this.onScroll}
         maxHeight={pxToDp(220)}
         minHeight={pxToDp(40)}
+        // 这里显示的是轮播图
         renderForeground={() => (
+          // control 是底部的小圆点
           <Carousel control style={{ height: pxToDp(220) }}>
             {userDetail.silder.map((v, i) => <Image key={i}
               source={{ uri: BASE_URI + v.thum_img_path }}
@@ -241,6 +263,7 @@ class Index extends Component {
                   {/* 2.4 相册 开始 */}
                   <View style={{ flexWrap: "wrap", flexDirection: "row", paddingTop: pxToDp(5), paddingBottom: pxToDp(5) }}>
                     {v.album.map((vv, ii) => <TouchableOpacity
+                      // 第一个i是第几个博客，第二个ii是里面图片的索引
                       onPress={() => this.handleShowAlbum(i, ii)}
                       key={ii}><Image
                         style={{ width: pxToDp(70), height: pxToDp(70), marginRight: pxToDp(5) }}
@@ -253,11 +276,19 @@ class Index extends Component {
               }
             </View>
             {/* 2.2 列表 结束 */}
-
+          
+         {/* 没有更多数据了 */}
          {this.params.page>=this.totalPages?<View style={{height:pxToDp(80),alignItems:"center",justifyContent:"center"}} ><Text style={{color:"#666"}} >没有更多数据了</Text></View>:<></>}
           </View>
           {/* 2.0 动态 结束 */}
-
+          
+          {/* 给上面的图片添加点击事件，这个是放大组件
+          // 控制 图片放大组件 是否显示
+          showAlbum: false,
+          // 放大显示的图片的索引
+          currentIndex: 0,
+          // 放大图片的路径数组
+          imgUrls: [] */}
           <Modal visible={showAlbum} transparent={true}>
             <ImageViewer
               onClick={() => this.setState({ showAlbum: false })}

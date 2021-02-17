@@ -1,5 +1,8 @@
 import { observable, action } from "mobx";
 
+/**
+ * 这个里面是储存用户所有信息的
+ */
 class UserStore {
   @observable user = {
     // "Distance": 0,

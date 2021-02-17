@@ -13,7 +13,7 @@ class Index extends Component {
   }
   state = {
     list: [
-      //       uid: 7
+      // uid: 7
       // header: "/upload/18665711978.png"
       // nick_name: "一叶知秋"
       // dist: 0
@@ -54,6 +54,7 @@ class Index extends Component {
 
   // 获取附近的数据
   getList = async () => {
+    // 第二个参数得是一个对象形式
     const res = await request.privateGet(FRIENDS_SEARCH, this.params);
     this.setState({ list: res.data });
   }
@@ -107,10 +108,12 @@ class Index extends Component {
             >
               <ImageBackground
                 source={require("../../../res/showfirend.png")}
+                // 让效果是一个拉伸效果
                 resizeMode="stretch"
                 style={{ ...whMap, position: "relative", alignItems: "center" }}
               >
                 <Text
+                  // 超出部分省略号
                   numberOfLines={1}
                   style={{ color: "#ffffff9a", position: "absolute", top: -pxToDp(20) }}
                 >{v.nick_name}</Text>

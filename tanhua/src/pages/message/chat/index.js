@@ -6,6 +6,7 @@ import { BASE_URI } from "../../../utils/pathMap";
 import RNFS from 'react-native-fs';
 
 // 聊天的ui库
+// 记住这个呀
 import IMUI from 'aurora-imui-react-native'
 import JMessage from '../../../utils/JMessage';
 import { inject, observer } from 'mobx-react';
@@ -52,7 +53,7 @@ class TestRNIMUI extends Component {
   constructor(props) {
     super(props);
     let initHeight;
-    if (Platform.OS === "ios") {
+    if (Platform.OS = == "ios") {
       initHeight = 46
     } else {
       initHeight = 100

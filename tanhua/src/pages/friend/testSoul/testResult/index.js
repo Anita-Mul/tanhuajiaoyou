@@ -17,6 +17,7 @@ class Index extends Component {
         <THNav title="测试结果" />
         <ImageBackground
           style={{ flex: 1, width: "100%", position: 'relative' }}
+          // 设置里面图片的伸展方式
           resizeMode="stretch"
           source={require("../../../../res/result.png")}
         >
@@ -68,6 +69,7 @@ class Index extends Component {
           }} >与你相似</Text>
 
           <ScrollView
+          // 滚动的方向的是横向，也可以控制里面的元素是横向
           horizontal={true}
           contentContainerStyle={{flexDirection:"row",alignItems:'center'}}
           style={{position:'absolute',width:"96%",height:"11%",left:"2%",top:"72%"}}

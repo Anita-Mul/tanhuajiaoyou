@@ -81,15 +81,18 @@ class Index extends Component {
   // 选择了答案
   chooeseAns=async (ans)=>{
     const {currentIndex,questionList}=this.state;
+    // 将答案push进去
     this.ansList.push(ans);
     if(currentIndex>=questionList.length-1){
       // 最后一题了 
       const url=FRIENDS_QUESTIONANS.replace(":id",this.props.route.params.qid);
       const answers=this.ansList.join(",");
+      // 这里记住要加{answers}
       const res=await request.privatePost(url,{answers}); 
       // console.log(res);
       this.props.navigation.navigate("TestResult",res.data);
       
+    // 这个是发送这个请求之后的返回值
     // "abstract": 80,
     // "content": "感性动物，更加在乎恋爱中双方的感受。 对生活有着相同的感触，也许经历不同，但你们都知道物质才是生活的基础，没有面包的爱情也许不会幸福； 爱情中，希望得到彼此更多的爱。 也许你都经历过生活的坎坷，所以你们都希望有一个安安稳稳的未来生活，两个孩子一只狗，一个温馨的家是你们的归属。 希望在细节上给与对方最大的关怀，从生活的点点滴滴去珍爱对方。 属于爱情中的”奉献者“，期望对方比自己更快乐。 对生活有着更长远的打算，也许当下苦一点，并不会对你们造成多少伤害，你们期许的是一个更好的未来。 在日常生活中，都知道自己想要什么不想要什么，所以很少会冲动消费。 对命运这种事情，有着难得一致的认同感，都认为有些感情早已安排妥当，只是静静的等待我们去发现。 对人对事对物，都可以极大程度的包容，这使你们未来沟通起来会更加顺畅。",
     // "currentUser": {
@@ -177,6 +180,8 @@ class Index extends Component {
 
             <View style={{ width: "100%" }}>
               {questionList[currentIndex].answers.map((v, i) => <TouchableOpacity 
+              // v.ans_No 是ABC啥子的
+              // 如果里面要传参数，就得这样写
               onPress={this.chooeseAns.bind(this,v.ans_No)}
               key={i}
               style={{ marginTop: pxToDp(10) }}>
