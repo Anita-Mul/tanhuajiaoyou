@@ -53,7 +53,7 @@ class TestRNIMUI extends Component {
   constructor(props) {
     super(props);
     let initHeight;
-    if (Platform.OS = == "ios") {
+    if (Platform.OS == "ios") {
       initHeight = 46
     } else {
       initHeight = 100
